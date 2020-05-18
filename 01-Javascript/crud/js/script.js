@@ -2,6 +2,8 @@ window.addEventListener('load', start)
 
 var globalNames = ['Nícolas', 'Gael', 'Liz', 'Cléo']
 var inputName = null
+var isEditing = false
+var currentIndex = null
 
 function start() {
   inputName = document.querySelector('#inputName')
@@ -17,14 +19,22 @@ function preventFormSubmit() {
 
 function startInput() {
   inputName.addEventListener('keyup', event => {
-    if (event.key === 'Enter') {
-      const insertName = newName => globalNames.push(newName) // Insere nome no vetor.
-      insertName(event.target.value)
+    if (event.key === 'Enter' && event.target.value.trim() !== '') {
+      if (isEditing) {
+        const updateName = newName => globalNames[currentIndex] = newName
+        updateName(event.target.value)
+        console.log('edit')
+      } else {
+        const insertName = newName => globalNames.push(newName) // Insere nome no vetor.
+        insertName(event.target.value)
+        console.log('insert')
+      }
+
       renderList()
-      console.log(globalNames)
     }
   })
-
+  
+  isEditing = false // Desabilita o padrão de edição.
   inputName.focus()
 }
 
@@ -42,6 +52,21 @@ function renderList() {
     return buttonElement
   }
 
+  function createSpan(name, index) {
+    function editItem() {
+      inputName.value = name
+      inputName.focus()
+      isEditing = true
+      currentIndex = index
+    }
+
+    const spanElement = document.createElement('span')
+    spanElement.classList.add('clickable')
+    spanElement.textContent = name
+    spanElement.addEventListener('click', editItem)
+    return spanElement
+  }
+
   const divNames = document.querySelector('#names')
   divNames.innerHTML = '' // Limpa ao inserir.
   
@@ -49,10 +74,9 @@ function renderList() {
   
   for (let i = 0; i < globalNames.length; i++) {
     const currentName = globalNames[i]
-    const buttonElement = createDeleteButton(i)
 
-    const spanElement = document.createElement('span')
-    spanElement.textContent = currentName
+    const buttonElement = createDeleteButton(i)
+    const spanElement = createSpan(currentName, i)
 
     const liElement = document.createElement('li')
     liElement.appendChild(buttonElement)
