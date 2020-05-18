@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  background-color: rgb(196, 139, 186);
+  padding: 10px;
+  border-radius: 8px;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 16px;
+  padding: 20px;
+  text-align: center;
+}
+
+input[type=range] {
+  width: 200px;
+}
+
+input[type=text] {
+  width: 50px;
+  text-align: center;
+}
+
+.square {
+  width: 100px;
+  height: 100px;
+  border-radius: 8px;
+  margin: 20px auto;
+}
