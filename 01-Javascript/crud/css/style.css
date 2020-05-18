@@ -2,11 +2,24 @@
 
 body {
   font-family: "Roboto", sans-serif;
+  color:#A04668;
+}
+
+.box {
+  width: 800px;
+  background-color: #D9D0DE;
+  margin: 0 auto;
+  text-align: center;
+  border-radius: 8px;
+  padding-top: 16px;
+  padding-bottom: 16px;
 }
 
 ul,
 li {
   list-style: none;
+  text-align: left;
+  padding-left: 180px;
 }
 
 .clickable {
@@ -18,4 +31,14 @@ li {
   font-weight: bold;
   background-color: red;
   margin-right: 10px;
+}
+
+input[type=text] {
+  width: 500px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
