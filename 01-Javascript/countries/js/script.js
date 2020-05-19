@@ -49,5 +49,43 @@ async function fetchCountries() {
 }
 
 function render() {
-  console.log('render')
+  renderCountryList()
+  renderFavorites()
+  renderSummary()
+  handleCountryButtons()
 }
+
+function renderCountryList() {
+  let countriesHTML = '<div>'
+
+  allCountries.forEach(country => {
+    const { id, name, population, flag } = country
+
+    const countryHTML = `
+      <div class="country">
+        <div>
+          <a id="${id}" class="waves-effect waves-light btn">+</a>
+        </div>
+        <div>
+          <img src="${flag}" alt="${name}" />
+        </div>
+        <div>
+          <ul>
+            <li>${name}</li>
+            <li>${population}</li>
+          </ul>
+        </div>
+      </div>
+    `
+
+    countriesHTML += countryHTML
+  })
+
+  tabCountries.innerHTML = countriesHTML
+}
+
+function renderFavorites() {}
+
+function renderSummary() {}
+
+function handleCountryButtons() {}
