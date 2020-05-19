@@ -126,7 +126,7 @@ function renderSummary() {
 }
 
 function handleCountryButtons() {
-  // Converte para array
+  // Array.from -> converte para array
   const countryButtons = Array.from(tabCountries.querySelectorAll('.btn')) 
   const favoriteButtons = Array.from(tabFavorites.querySelectorAll('.btn'))
 
@@ -142,11 +142,29 @@ function handleCountryButtons() {
 }
 
 function addToFavorites(id) {
+  const countryToAdd = allCountries.find(country => country.id === id)
+  allFavorites = [...allFavorites, countryToAdd] // Add nos favoritos
+  allFavorites.sort((a, b) => a.name.localeCompare(b.name)) // Ordena por nome
+  // console.log(countryToAdd)
+  // console.log(allFavorites)
 
+  allCountries = allCountries.filter(country => country.id !== id) // Reatribui todos os objs, menos o que bater o id
+
+  countCountries.textContent = allCountries.length
+  countFavorites.textContent = allFavorites.length
+
+  render()
 }
 
 function removeFromFavorites(id) {
+  const countryToRemove = allFavorites.find(country => country.id === id)
+  allCountries = [...allCountries, countryToRemove] // Add na lista principal
+  allCountries.sort((a, b) => a.name.localeCompare(b.name)) // Ordena por nome 
 
+  allFavorites = allFavorites.filter(country => country.id !== id) // // Reatribui todos os objs, menos o que bater o id
+
+  countCountries.textContent = allCountries.length
+  countFavorites.textContent = allFavorites.length
+
+  render()
 }
-
-// 4:12
