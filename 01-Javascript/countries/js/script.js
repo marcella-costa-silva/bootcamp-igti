@@ -40,6 +40,7 @@ async function fetchCountries() {
       id: numericCode,
       name: translations.br,
       population,
+      formattedPopulation: formatNumber(population),
       flag
     }
   })
@@ -59,7 +60,7 @@ function renderCountryList() {
   let countriesHTML = '<div>'
 
   allCountries.forEach(country => {
-    const { id, name, population, flag } = country
+    const { id, name, formattedPopulation, flag } = country
 
     const countryHTML = `
       <div class="country">
@@ -72,7 +73,7 @@ function renderCountryList() {
         <div>
           <ul>
             <li>${name}</li>
-            <li>${population}</li>
+            <li>${formattedPopulation}</li>
           </ul>
         </div>
       </div>
@@ -89,7 +90,7 @@ function renderFavorites() {
   let favoritesHTML = '<div>'
 
   allFavorites.forEach(country => {
-    const { id, name, population, flag } = country
+    const { id, name, formattedPopulation, flag } = country
 
     const favoriteCountryHTML = `
       <div class="country">
@@ -102,7 +103,7 @@ function renderFavorites() {
         <div>
           <ul>
             <li>${name}</li>
-            <li>${population}</li>
+            <li>${formattedPopulation}</li>
           </ul>
         </div>
       </div>
@@ -119,10 +120,10 @@ function renderSummary() {
   countFavorites.textContent = allFavorites.length
 
   const totalPopulation = allCountries.reduce((acc, curr) => acc + curr.population, 0)
-  totalPopulationList.textContent = totalPopulation
+  totalPopulationList.textContent = formatNumber(totalPopulation)
 
   const totalFavorites = allFavorites.reduce((acc, curr) => acc + curr.population, 0)
-  totalPopulationListFavorites.textContent = totalFavorites
+  totalPopulationListFavorites.textContent = formatNumber(totalFavorites)
 }
 
 function handleCountryButtons() {
@@ -168,3 +169,5 @@ function removeFromFavorites(id) {
 
   render()
 }
+
+const formatNumber = number => numberFormat.format(number)
