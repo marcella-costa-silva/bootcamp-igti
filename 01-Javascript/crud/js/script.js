@@ -1,95 +1,109 @@
-window.addEventListener('load', start)
+let globalIsEditing = false
+let globalCurrentItem = null
+let globalNames = ['Liz', 'Cléo', 'Nícolas', 'Gael']
 
-var globalNames = ['Nícolas', 'Gael', 'Liz', 'Cléo']
-var inputName = null
-var isEditing = false
-var currentIndex = null
-
-function start() {
-  inputName = document.querySelector('#inputName')
+window.addEventListener('load', () => {
   preventFormSubmit()
-  startInput()
+  activateInput()
   renderList()
-}
+})
 
 function preventFormSubmit() {
+  const handleSubmit = (event) => event.preventDefault()
   const form = document.querySelector('form')
-  form.addEventListener('submit', event => event.preventDefault())
+  form.addEventListener('submit', handleSubmit)
 }
 
-function startInput() {
-  inputName.addEventListener('keyup', event => {
-    if (event.key === 'Enter' && event.target.value.trim() !== '') {
-      if (isEditing) {
-        const updateName = newName => globalNames[currentIndex] = newName
-        updateName(event.target.value)
-        console.log('edit')
-      } else {
-        const insertName = newName => globalNames.push(newName) // Insere nome no vetor.
-        insertName(event.target.value)
-        console.log('insert')
-      }
+function activateInput() {
+  const inputName = getInput()
 
-      renderList()
+  inputName.addEventListener('keyup', (event) => {
+    if (event.key !== 'Enter') return // Enquanto o usuário não digital Enter, nada será feito
+    
+    const currentName = event.target.value.trim() // Obtém o valor digitado sem espaços em branco
+
+    if (currentName === '') {
+      clear()
+      return
     }
+
+    if (globalIsEditing) {
+      console.log('edit')
+      globalNames[globalCurrentItem] = currentName
+    } else {
+      console.log('add')
+      globalNames = [...globalNames, currentName]
+    }
+
+    clear()
+    renderList()
   })
-  
-  isEditing = false // Desabilita o padrão de edição.
-  inputName.focus()
 }
 
+const getInput = () => document.querySelector('#inputName')
+
+// Limpa os dados do formulário e "reinicializa" a edição.
+const clear = () => {
+  const inputName = getInput()
+  inputName.value = ''
+  inputName.focus()
+  globalIsEditing = false
+}
+
+// Renderiza a lista.
 function renderList() {
   function createDeleteButton(index) {
-    function deleteName() {
-      globalNames.splice(index, 1) // Posição + qtdd elementos.
+    const removeItem = () => {
+      globalNames = globalNames.filter((_, i) => i !== index)
       renderList()
     }
 
     const buttonElement = document.createElement('button')
-    buttonElement.classList.add('deleteButton')
     buttonElement.textContent = 'x'
-    buttonElement.addEventListener('click', deleteName)
+    buttonElement.classList.add('deleteButton')
+    buttonElement.addEventListener('click', removeItem)
+
     return buttonElement
   }
 
-  function createSpan(name, index) {
-    function editItem() {
-      inputName.value = name
+  // Função auxiliar para criar o item de lista de forma clicável.
+  function createNameSpan(currentName, currentItem) {
+    const editItem = () => {
+      const inputName = getInput()
+      globalIsEditing = true
+      globalCurrentItem = currentItem
+      inputName.value = currentName
       inputName.focus()
-      isEditing = true
-      currentIndex = index
     }
 
     const spanElement = document.createElement('span')
+    spanElement.textContent = currentName
     spanElement.classList.add('clickable')
-    spanElement.textContent = name
     spanElement.addEventListener('click', editItem)
+
     return spanElement
   }
 
   const divNames = document.querySelector('#names')
-  divNames.innerHTML = '' // Limpa ao inserir.
-  
-  const ulElement = document.createElement('ul')
-  
+  const ul = document.createElement('ul')
+
+  /**
+   * Para cada nome, cria-se um <li> correspondente, adicionando um botão para exclusão 
+   * e tornando o item clicável para edição.
+   */
   for (let i = 0; i < globalNames.length; i++) {
-    const currentName = globalNames[i]
+    let currentName = globalNames[i]
 
-    const buttonElement = createDeleteButton(i)
-    const spanElement = createSpan(currentName, i)
+    let deleteButton = createDeleteButton(i)
+    let nameSpan = createNameSpan(currentName, i)
 
-    const liElement = document.createElement('li')
-    liElement.appendChild(buttonElement)
-    liElement.appendChild(spanElement)
+    let li = document.createElement('li')
+    li.appendChild(deleteButton)
+    li.appendChild(nameSpan)
 
-    ulElement.appendChild(liElement)
+    ul.appendChild(li)
   }
 
-  divNames.appendChild(ulElement)
-  clearInput()
-}
-
-function clearInput() {
-  inputName.value = ''
-  inputName.focus()
+  divNames.innerHTML = '' // Limpa os dados.
+  divNames.appendChild(ul)
 }
