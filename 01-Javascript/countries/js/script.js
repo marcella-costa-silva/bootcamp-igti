@@ -81,10 +81,38 @@ function renderCountryList() {
     countriesHTML += countryHTML
   })
 
+  countriesHTML += '</div>'
   tabCountries.innerHTML = countriesHTML
 }
 
-function renderFavorites() {}
+function renderFavorites() {
+  let favoritesHTML = '<div>'
+
+  favoriteCountries.forEach(country => {
+    const { id, name, population, flag } = country
+
+    const favoriteCountryHTML = `
+      <div class="country">
+        <div>
+          <a id="${id}" class="waves-effect waves-light btn red darken-4">+</a>
+        </div>
+        <div>
+          <img src="${flag}" alt="${name}" />
+        </div>
+        <div>
+          <ul>
+            <li>${name}</li>
+            <li>${population}</li>
+          </ul>
+        </div>
+      </div>
+    `
+    favoritesHTML += favoriteCountryHTML
+  })
+
+  favoritesHTML += '</div>'
+  tabFavorites.innerHTML = favoritesHTML
+}
 
 function renderSummary() {}
 
