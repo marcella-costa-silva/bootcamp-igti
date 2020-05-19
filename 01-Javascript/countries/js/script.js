@@ -3,13 +3,13 @@ let tabCountries = null
 let tabFavorites = null
 
 let allCountries = []
-let favoriteCountries = []
+let allFavorites = []
 
 let countCountries = 0
 let countFavorites = 0
 
-let totalPopulation = 0
-let totalPopulationFavorites = 0
+let totalPopulationList = 0
+let totalPopulationListFavorites = 0
 
 let numberFormat = null
 
@@ -20,8 +20,8 @@ window.addEventListener('load', () => {
   countCountries = document.querySelector('#count-countries')
   countFavorites = document.querySelector('#count-favorites')
 
-  totalPopulation = document.querySelector('#total-population-list')
-  totalPopulationFavorites = document.querySelector('#total-population-favorites')
+  totalPopulationList = document.querySelector('#total-population-list')
+  totalPopulationListFavorites = document.querySelector('#total-population-favorites')
 
   numberFormat = Intl.NumberFormat('pt-BR')
 
@@ -88,7 +88,7 @@ function renderCountryList() {
 function renderFavorites() {
   let favoritesHTML = '<div>'
 
-  favoriteCountries.forEach(country => {
+  allFavorites.forEach(country => {
     const { id, name, population, flag } = country
 
     const favoriteCountryHTML = `
@@ -114,6 +114,15 @@ function renderFavorites() {
   tabFavorites.innerHTML = favoritesHTML
 }
 
-function renderSummary() {}
+function renderSummary() {
+  countCountries.textContent = allCountries.length
+  countFavorites.textContent = allFavorites.length
+
+  const totalPopulation = allCountries.reduce((acc, curr) => acc + curr.population, 0)
+  totalPopulationList.textContent = totalPopulation
+
+  const totalFavorites = allFavorites.reduce((acc, curr) => acc + curr.population, 0)
+  totalPopulationListFavorites.textContent = totalFavorites
+}
 
 function handleCountryButtons() {}
