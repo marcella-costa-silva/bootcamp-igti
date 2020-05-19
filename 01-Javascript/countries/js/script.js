@@ -28,6 +28,26 @@ window.addEventListener('load', () => {
   fetchCountries()
 })
 
-function fetchCountries() {
+async function fetchCountries() {
+  const url = await 'https://restcountries.eu/rest/v2/all'
+  const res = await fetch(url)
+  const json = await res.json()
 
+  allCountries = json.map(country => {
+    const { numericCode, translations, population, flag } = country
+
+    return {
+      id: numericCode,
+      name: translations.br,
+      population,
+      flag
+    }
+  })
+
+  console.log(allCountries)
+  render()
+}
+
+function render() {
+  console.log('render')
 }
