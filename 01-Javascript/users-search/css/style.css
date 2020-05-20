@@ -3,6 +3,21 @@ h1 {
 }
 
 #search {
-  /* background-color: brown; */
   margin: 32px 0;
+}
+
+img {
+  border-radius: 50%;
+  display: inline;
+  padding-right: 8px;
+}
+
+li.character {
+  margin-bottom: 16px;
+  padding: 8px;
+  list-style: none;
+}
+
+li.character p {
+  display: inline;
 }

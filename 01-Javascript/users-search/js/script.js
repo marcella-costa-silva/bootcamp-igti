@@ -59,7 +59,7 @@ const fetchUsers = async () => {
         gender
       }
     })
-    
+
     // console.log(allUsers)
     render()
   } catch (error) {
@@ -95,13 +95,12 @@ const renderUsers = users => {
   const usersHTML = users.map(user => {
     return `
       <li class="character">
-        <p>${user.name}</p>
-        <p>${user.age}</p>
-        <img src="${user.picture}" alt="${user.name}">
+      <img src="${user.picture}" alt="${user.name}">
+        <p class="name">${user.name} - </p>
+        <p>${user.age} years</p>
       </li>
     `
-    })
-    .join('')
+  }).join('')
 
   usersList.innerHTML = usersHTML
 
