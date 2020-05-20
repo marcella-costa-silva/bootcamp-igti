@@ -4,7 +4,8 @@ let tabStatistics = null
 
 let allUsers = []
 
-let countUsers = 0 // Usuários encontrados
+let totalUsers = 0 // Usuários encontrados
+
 let countMaleGender = 0
 let countFemaleGender = 0
 
@@ -15,7 +16,7 @@ let numberFormat = null
 
 window.addEventListener('load', () => {
 
-  fetchUsers()
+  // fetchUsers()
 })
 
 async function fetchUsers() {
