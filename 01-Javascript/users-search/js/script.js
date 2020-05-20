@@ -66,22 +66,29 @@ const render = () => {
   searchUser()
 }
 
+// Evita o comportamento padrão.
 const preventFormSubmit = () => {
   const form = document.querySelector('form')
   form.addEventListener('submit', event => event.preventDefault())
 }
 
+// Busca o usuário de acordo com a tecla digitada.
 const searchUser = () => {
   searchInput.addEventListener('keyup', e => {
     const filteredUsers = allUsers.filter(character => {
       return character.name.includes(e.target.value) // ou e.key
     })
 
-    console.log(filteredUsers)
+    // console.log(filteredUsers)
+    
     renderUsers(filteredUsers)
+    renderSumAges(filteredUsers)
+    renderAverageAges(filteredUsers)
+    renderGender(filteredUsers)
   })
 }
 
+// Renderiza os usuários na tela de acordo com o nome digitado.
 const renderUsers = users => {
   totalUsers.textContent = users.length
 
@@ -96,10 +103,6 @@ const renderUsers = users => {
   }).join('')
 
   usersList.innerHTML = usersHTML
-
-  renderSumAges(users)
-  renderAverageAges(users)
-  renderGender(users)
 }
 
 const renderSumAges = users => {
