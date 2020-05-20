@@ -14,6 +14,9 @@ let agesAverage = 0
 
 let numberFormat = null
 
+let searchInput = document.querySelector('#search-input')
+let searchButton = document.querySelector('#search-button')
+
 window.addEventListener('load', () => {
   tabUsers = document.querySelector('#tab-users')
   tabStatistics = document.querySelector('#tab-statistics')
@@ -27,6 +30,8 @@ window.addEventListener('load', () => {
   agesAverage = document.querySelector('#ages-average')
 
   numberFormat = Intl.NumberFormat('pt-BR')
+
+  searchButton.disabled = true
 
   fetchUsers()
 })
@@ -53,10 +58,29 @@ async function fetchUsers() {
 
 function render() {
   preventFormSubmit()
+  checkEmptyInput()
   // userSearch()
 }
 
 function preventFormSubmit() {
   const form = document.querySelector('form')
   form.addEventListener('submit', event => event.preventDefault())
+}
+
+
+function userSearch() {
+  searchInput.addEventListener('keyup', event => {
+    console.log(event.key)
+    
+  })
+}
+
+function checkEmptyInput() {
+  searchInput.addEventListener('input', () => {
+    if (searchInput.value !== '') {
+      searchButton.disabled = false
+    } else {
+      searchButton.disabled = true
+    }
+  })
 }
