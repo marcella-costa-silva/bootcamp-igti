@@ -15,8 +15,20 @@ let agesAverage = 0
 let numberFormat = null
 
 window.addEventListener('load', () => {
+  tabUsers = document.querySelector('#tab-users')
+  tabStatistics = document.querySelector('#tab-statistics')
 
-  // fetchUsers()
+  totalUsers = document.querySelector('#total-users')
+
+  countMaleGender = document.querySelector('#count-male-gender')
+  countFemaleGender = document.querySelector('#count-female-gender')
+
+  agesSum = document.querySelector('#ages-sum')
+  agesAverage = document.querySelector('#ages-average')
+
+  numberFormat = Intl.NumberFormat('pt-BR')
+
+  fetchUsers()
 })
 
 async function fetchUsers() {
@@ -40,5 +52,11 @@ async function fetchUsers() {
 }
 
 function render() {
-  
+  preventFormSubmit()
+  // userSearch()
+}
+
+function preventFormSubmit() {
+  const form = document.querySelector('form')
+  form.addEventListener('submit', event => event.preventDefault())
 }
