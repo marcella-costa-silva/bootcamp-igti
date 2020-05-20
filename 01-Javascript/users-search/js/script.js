@@ -62,7 +62,6 @@ const fetchUsers = async () => {
     
     // console.log(allUsers)
     render()
-
   } catch (error) {
     console.log(`API Error: ${error}`)
   }
@@ -72,7 +71,6 @@ const render = () => {
   preventFormSubmit()
   checkEmptyInput()
   searchUser()
-  
 }
 
 const preventFormSubmit = () => {
@@ -112,18 +110,14 @@ const renderUsers = users => {
 }
 
 const renderSumAges = users => {
-  const ages = users
-    .map(user => user.age)
-    .reduce((acc, curr) => acc + curr)
-  agesSum.textContent = ages
+  const ages = users.reduce((acc, curr) => acc + curr.age, 0)
+  agesSum.textContent = formatNumber(ages)
 }
 
 const renderAverageAges = users => {
   const totalUsers = users.length
-  const ages = users
-    .map(user => user.age)
-    .reduce((acc, curr) => acc + curr)
-  agesAverage.textContent = ages / totalUsers
+  const ages = users.reduce((acc, curr) => acc + curr.age, 0)
+  agesAverage.textContent = formatNumber(ages / totalUsers)
 }
 
 const checkEmptyInput = () => {
@@ -135,3 +129,5 @@ const checkEmptyInput = () => {
     }
   })
 }
+
+const formatNumber = number => numberFormat.format(number)
