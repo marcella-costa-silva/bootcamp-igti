@@ -45,7 +45,7 @@ window.addEventListener('load', () => {
 
 const fetchUsers = async () => {
   try {
-    const url = await 'https://randomuser.me/api/?results=100'
+    const url = await 'https://randomuser.me/api/?seed=javascript&results=100&nat=BR&noinfo'
     const res = await fetch(url)
     const json = await res.json()
 
