@@ -50,13 +50,13 @@ async function fetchCountries() {
 }
 
 function render() {
-  renderCountryList()
+  renderCountries()
   renderFavorites()
   renderSummary()
   handleCountryButtons()
 }
 
-function renderCountryList() {
+function renderCountries() {
   let countriesHTML = '<div>'
 
   allCountries.forEach(country => {
@@ -128,7 +128,7 @@ function renderSummary() {
 
 function handleCountryButtons() {
   // Array.from -> converte para array
-  const countryButtons = Array.from(tabCountries.querySelectorAll('.btn')) 
+  const countryButtons = Array.from(tabCountries.querySelectorAll('.btn'))
   const favoriteButtons = Array.from(tabFavorites.querySelectorAll('.btn'))
 
   // console.log(countryButtons)
@@ -143,12 +143,15 @@ function handleCountryButtons() {
 }
 
 function addToFavorites(id) {
+  // find -> encontra elementos com base em proposição. Só localiza o primeiro (retorna o obj)
   const countryToAdd = allCountries.find(country => country.id === id)
+
   allFavorites = [...allFavorites, countryToAdd] // Add nos favoritos
   allFavorites.sort((a, b) => a.name.localeCompare(b.name)) // Ordena por nome
-  // console.log(countryToAdd)
-  // console.log(allFavorites)
 
+  console.log(countryToAdd)
+  
+  // filter -> gera um novo array filtrando os elementos com base em proposição (imutável)
   allCountries = allCountries.filter(country => country.id !== id) // Reatribui todos os objs, menos o que bater o id
 
   countCountries.textContent = allCountries.length
@@ -158,11 +161,16 @@ function addToFavorites(id) {
 }
 
 function removeFromFavorites(id) {
+  // find -> encontra elementos com base em proposição. Só localiza o primeiro (retorna o obj)
   const countryToRemove = allFavorites.find(country => country.id === id)
-  allCountries = [...allCountries, countryToRemove] // Add na lista principal
-  allCountries.sort((a, b) => a.name.localeCompare(b.name)) // Ordena por nome 
 
-  allFavorites = allFavorites.filter(country => country.id !== id) // // Reatribui todos os objs, menos o que bater o id
+  allCountries = [...allCountries, countryToRemove] // Add na lista principal
+  allCountries.sort((a, b) => a.name.localeCompare(b.name)) // Ordena por nome
+
+  // filter -> gera um novo array filtrando os elementos com base em proposição (imutável)
+  allFavorites = allFavorites.filter(country => country.id !== id) // Reatribui todos os objs, menos o que bater o id
+
+  console.log(countryToRemove)
 
   countCountries.textContent = allCountries.length
   countFavorites.textContent = allFavorites.length
