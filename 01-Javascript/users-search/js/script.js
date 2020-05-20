@@ -91,6 +91,9 @@ const searchUser = () => {
 }
 
 const renderUsers = users => {
+  totalUsers.textContent = users.length
+  console.log(totalUsers)
+
   const usersHTML = users.map(user => {
       return `
         <li class="character">
