@@ -1,10 +1,6 @@
-// Variáveis de Estado
-let tabUsers = null
-let tabStatistics = null
-
 let allUsers = []
 
-let totalUsers = 0 // Usuários encontrados
+let totalUsers = 0
 
 let countMaleGender = 0
 let countFemaleGender = 0
@@ -20,9 +16,6 @@ let searchButton = null
 let usersList = null
 
 window.addEventListener('load', () => {
-  tabUsers = document.querySelector('#tab-users')
-  tabStatistics = document.querySelector('#tab-statistics')
-
   totalUsers = document.querySelector('#total-users')
 
   countMaleGender = document.querySelector('#count-male-gender')
@@ -93,6 +86,8 @@ const renderUsers = users => {
   totalUsers.textContent = users.length
 
   const usersHTML = users.map(user => {
+    // console.log(user.gender)
+
     return `
       <li class="character">
       <img src="${user.picture}" alt="${user.name}">
