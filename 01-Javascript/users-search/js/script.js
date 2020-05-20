@@ -86,11 +86,9 @@ const renderUsers = users => {
   totalUsers.textContent = users.length
 
   const usersHTML = users.map(user => {
-    // console.log(user.gender)
-
     return `
       <li class="character">
-      <img src="${user.picture}" alt="${user.name}">
+        <img src="${user.picture}" alt="${user.name}">
         <p class="name">${user.name} - </p>
         <p>${user.age} years</p>
       </li>
@@ -101,6 +99,7 @@ const renderUsers = users => {
 
   renderSumAges(users)
   renderAverageAges(users)
+  renderGender(users)
 }
 
 const renderSumAges = users => {
@@ -112,6 +111,19 @@ const renderAverageAges = users => {
   const totalUsers = users.length
   const ages = users.reduce((acc, curr) => acc + curr.age, 0)
   agesAverage.textContent = formatNumber(ages / totalUsers)
+}
+
+const renderGender = users => {
+  const maleGender = users
+    .map(user => user.gender)
+    .filter(user => user === 'male')
+
+  const femaleGender = users
+    .map(user => user.gender)
+    .filter(user => user === 'female')
+
+  countMaleGender.textContent = maleGender.length
+  countFemaleGender.textContent = femaleGender.length
 }
 
 const checkEmptyInput = () => {
