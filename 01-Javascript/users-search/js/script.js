@@ -72,6 +72,7 @@ const render = () => {
   preventFormSubmit()
   checkEmptyInput()
   searchUser()
+  
 }
 
 const preventFormSubmit = () => {
@@ -92,20 +93,30 @@ const searchUser = () => {
 
 const renderUsers = users => {
   totalUsers.textContent = users.length
-  console.log(totalUsers)
 
   const usersHTML = users.map(user => {
-      return `
-        <li class="character">
-          <p>${user.name}</p>
-          <p>${user.age}</p>
-          <img src="${user.picture}" alt="${user.name}">
-        </li>
-      `
+    // console.log(user.gender === 'female')
+
+    return `
+      <li class="character">
+        <p>${user.name}</p>
+        <p>${user.age}</p>
+        <img src="${user.picture}" alt="${user.name}">
+      </li>
+    `
     })
     .join('')
 
-    usersList.innerHTML = usersHTML
+  usersList.innerHTML = usersHTML
+
+  renderSumAges(users)
+}
+
+const renderSumAges = users => {
+  const ages = users
+    .map(user => user.age)
+    .reduce((acc, curr) => acc + curr)
+  agesSum.textContent = ages
 }
 
 const checkEmptyInput = () => {
