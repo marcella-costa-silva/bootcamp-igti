@@ -1,0 +1,16 @@
+Guardar os dados em memória
+
+() Função para filtrar usuários a partir de cada letra digitada (keyup) com botão ou enter
+() Quando não digitar nada, deverá aparecer "Nenhum usuário filtrado"
+() Desabilitar botão de busca quando o input estiver vazio
+() Fazer loading quando atualizar a página, enquanto ocorre, o input fica desabilitado
+
+() Função para trazer usuários (API)
+  () Imagem, nome, sobrenome, idade, sexo (map)
+  () Total de usuários encontrados quando buscar usuários
+
+() Função para trazer estatísticas quando buscar usuários (reduce)
+  () Sexo feminino
+  () Sexo masculino
+  () Soma das idades
+  () Média das idades
