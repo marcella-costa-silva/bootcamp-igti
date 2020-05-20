@@ -14,8 +14,10 @@ let agesAverage = 0
 
 let numberFormat = null
 
-let searchInput = document.querySelector('#search-input')
-let searchButton = document.querySelector('#search-button')
+let searchInput = null
+let searchButton = null
+
+let usersList = null
 
 window.addEventListener('load', () => {
   tabUsers = document.querySelector('#tab-users')
@@ -31,51 +33,79 @@ window.addEventListener('load', () => {
 
   numberFormat = Intl.NumberFormat('pt-BR')
 
+  searchInput = document.querySelector('#search-input')
+
+  searchButton = document.querySelector('#search-button')
   searchButton.disabled = true
+
+  usersList = document.querySelector('#users-list')
 
   fetchUsers()
 })
 
-async function fetchUsers() {
-  const url = await 'https://randomuser.me/api/?results=100'
-  const res = await fetch(url)
-  const json = await res.json()
+const fetchUsers = async () => {
+  try {
+    const url = await 'https://randomuser.me/api/?results=100'
+    const res = await fetch(url)
+    const json = await res.json()
 
-  allUsers = json.results.map(user => {
-    const { name, picture, dob, gender } = user
+    allUsers = json.results.map(user => {
+      const { name, picture, dob, gender } = user
 
-    return {
-      name: name.first + ' ' + name.last,
-      picture: picture.thumbnail,
-      age: dob.age,
-      gender
-    }
-  })
-  
-  console.log(allUsers)
-  render()
+      return {
+        name: name.first + ' ' + name.last,
+        picture: picture.thumbnail,
+        age: dob.age,
+        gender
+      }
+    })
+    
+    // console.log(allUsers)
+    render()
+
+  } catch (error) {
+    console.log(`API Error: ${error}`)
+  }
 }
 
-function render() {
+const render = () => {
   preventFormSubmit()
   checkEmptyInput()
-  // userSearch()
+  searchUser()
 }
 
-function preventFormSubmit() {
+const preventFormSubmit = () => {
   const form = document.querySelector('form')
   form.addEventListener('submit', event => event.preventDefault())
 }
 
+const searchUser = () => {
+  searchInput.addEventListener('keyup', e => {
+    const filteredUsers = allUsers.filter(character => {
+      return character.name.includes(e.target.value) // ou e.key
+    })
 
-function userSearch() {
-  searchInput.addEventListener('keyup', event => {
-    console.log(event.key)
-    
+    console.log(filteredUsers)
+    renderUsers(filteredUsers)
   })
 }
 
-function checkEmptyInput() {
+const renderUsers = users => {
+  const usersHTML = users.map(user => {
+      return `
+        <li class="character">
+          <p>${user.name}</p>
+          <p>${user.age}</p>
+          <img src="${user.picture}" alt="${user.name}">
+        </li>
+      `
+    })
+    .join('')
+
+    usersList.innerHTML = usersHTML
+}
+
+const checkEmptyInput = () => {
   searchInput.addEventListener('input', () => {
     if (searchInput.value !== '') {
       searchButton.disabled = false
