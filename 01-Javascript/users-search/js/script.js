@@ -117,14 +117,8 @@ const renderAverageAges = users => {
 }
 
 const renderGender = users => {
-  const maleGender = users
-    .map(user => user.gender)
-    .filter(user => user === 'male')
-
-  const femaleGender = users
-    .map(user => user.gender)
-    .filter(user => user === 'female')
-
+  const maleGender = users.filter(user => user.gender === 'male')
+  const femaleGender = users.filter(user => user.gender === 'female')
   countMaleGender.textContent = maleGender.length
   countFemaleGender.textContent = femaleGender.length
 }
