@@ -73,7 +73,7 @@ const loading = () => {
   setTimeout(() => {
     body.removeChild(loader)
     render()
-  }, 3000);
+  }, 99000);
 }
 
 const render = () => {
