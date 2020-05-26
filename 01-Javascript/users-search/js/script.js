@@ -73,7 +73,7 @@ const loading = () => {
   setTimeout(() => {
     body.removeChild(loader)
     render()
-  }, 3000)
+  }, 1000)
 }
 
 const render = () => {
@@ -108,7 +108,7 @@ const lowerName = name => name.toLowerCase()
 
 // Renderiza os usuários na tela de acordo com o nome digitado.
 const renderUsers = users => {
-  totalUsers.textContent = users.length
+  totalUsers.textContent = `${users.length} user(s)`
 
   const usersHTML = users.map(user => {
     return `
@@ -125,20 +125,20 @@ const renderUsers = users => {
 
 const renderSumAges = users => {
   const ages = users.reduce((acc, curr) => acc + curr.age, 0)
-  agesSum.textContent = formatNumber(ages)
+  agesSum.textContent = `Sum: ${formatNumber(ages)}`
 }
 
 const renderAverageAges = users => {
   const totalUsers = users.length
   const ages = users.reduce((acc, curr) => acc + curr.age, 0)
-  agesAverage.textContent = formatNumber(ages / totalUsers)
+  agesAverage.textContent = `Average: ${formatNumber(ages / totalUsers)}`
 }
 
 const renderGender = users => {
   const maleGender = users.filter(user => user.gender === 'male')
   const femaleGender = users.filter(user => user.gender === 'female')
-  countMaleGender.textContent = maleGender.length
-  countFemaleGender.textContent = femaleGender.length
+  countMaleGender.textContent = `Male gender: ${maleGender.length}`
+  countFemaleGender.textContent = `Female gender: ${femaleGender.length}`
 }
 
 const checkEmptyInput = () => {

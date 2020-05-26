@@ -1,50 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Users Search</title>
-  <link rel="stylesheet" href="./css/style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Users Search</title>
+    <link rel="stylesheet" href="./css/style.css" />
 
-  <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
-</head>
-<body>
-  <div class="loader"></div>
+    <link
+      rel="stylesheet"
+      href="./node_modules/bootstrap/dist/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <div class="loader"></div>
 
-  <div class="container">
-    <h1>Users Search</h1>
+    <div class="container">
+      <div class="row" id="search">
+        <form>
+          <div class="form-group col-md-10">
+            <input
+              type="text"
+              class="form-control"
+              id="search-input"
+              placeholder="Enter user..."
+            />
+          </div>
+          <button
+            type="button"
+            class="btn btn-primary col-md-2"
+            id="search-button"
+          >
+            Search
+          </button>
+        </form>
+      </div>
 
-    <div class="row" id="search">
-      <form>
-        <div class="form-group col-md-10">
-          <input type="text" class="form-control" id="search-input" placeholder="Enter user...">
-        </div>
-        <button type="button" class="btn btn-primary col-md-2" id="search-button">Search</button>
-      </form>
-    </div>
-
-    <div class="row">
-      <div class="col-md-6" id="users">
-        <h3>Users found: <span id="total-users"></span></h3>
-        <div class="tab-users">
+      <div class="row">
+        <div class="col-md-6" id="users">
+          <h3 id="total-users"></h3>
           <ul id="users-list"></ul>
         </div>
-      </div>
 
-      <div class="col-md-6" id="statistics">
-        <h3>Statistics</h3>
-        <h5>Male gender: <span id="count-male-gender"></span></h6>
-        <h5>Female gender: <span id="count-female-gender"></span></h6>
-        <h5>Sum: <span id="ages-sum"></span></h6>
-        <h5>Average: <span id="ages-average"></span></h6>
-
-        <div class="tab-statistics"></div>
+        <div class="col-md-6" id="statistics">
+          <h5 id="count-male-gender"></h5>
+          <h5 id="count-female-gender"></h5>
+          <h5 id="ages-sum"></h5>
+          <h5 id="ages-average"></h5>
+        </div>
       </div>
     </div>
-  </div>
 
-  <script src="./node_modules/jquery/dist/jquery.min.js"></script>
-  <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script src="./js/script.js"></script>
-</body>
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="./js/script.js"></script>
+  </body>
 </html>
