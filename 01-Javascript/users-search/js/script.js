@@ -54,10 +54,20 @@ const fetchUsers = async () => {
     })
 
     // console.log(allUsers)
-    render()
+
+    loading()
+
   } catch (error) {
     console.log(`API Error: ${error}`)
   }
+}
+
+// Após 3 segundos o "loading" será removido e tela será renderizada.
+const loading = () => {
+  setTimeout(() => {
+    document.querySelector("body").removeChild(document.querySelector(".loader"))
+    render()
+  }, 3000);
 }
 
 const render = () => {
@@ -80,7 +90,7 @@ const searchUser = () => {
     })
 
     // console.log(filteredUsers)
-    
+
     renderUsers(filteredUsers)
     renderSumAges(filteredUsers)
     renderAverageAges(filteredUsers)
