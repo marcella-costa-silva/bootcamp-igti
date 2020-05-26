@@ -104,6 +104,8 @@ const searchUser = () => {
 
     // console.log(filteredUsers)
 
+    sortNames(filteredUsers)
+
     renderUsers(filteredUsers)
     renderAges(filteredUsers)
     renderGender(filteredUsers)
@@ -111,6 +113,10 @@ const searchUser = () => {
 }
 
 const lowerName = name => name.toLowerCase()
+
+const sortNames = users => {
+  return users.sort((a, b) => a.name.localeCompare(b.name))
+}
 
 // Renderiza os usuários na tela de acordo com o nome digitado.
 const renderUsers = users => {
@@ -158,7 +164,6 @@ const checkEmptyInput = () => {
 const formatNumber = number => numberFormat.format(number)
 
 const clear = () => {
-  console.log('clear')
   usersBox.innerHTML = ''
   statiticsBox.innerHTML = ''
 }
