@@ -18,6 +18,9 @@ let usersList = null
 let loader = null
 let body = null
 
+let usersBox = null
+let statiticsBox = null
+
 window.addEventListener('load', () => {
   totalUsers = document.querySelector('#total-users')
 
@@ -39,6 +42,9 @@ window.addEventListener('load', () => {
   loader = document.querySelector(".loader")
   body = document.querySelector('body')
 
+  usersBox = document.querySelector('#users-box')
+  statiticsBox = document.querySelector('#statistics-box')
+
   fetchUsers()
 })
 
@@ -49,13 +55,14 @@ const fetchUsers = async () => {
     const json = await res.json()
 
     allUsers = json.results.map(user => {
-      const { name, picture, dob, gender } = user
+      const { name, picture, dob, gender, location } = user
 
       return {
         name: name.first + ' ' + name.last,
         picture: picture.thumbnail,
         age: dob.age,
-        gender
+        gender,
+        location: location.state
       }
     })
 
@@ -113,8 +120,9 @@ const renderUsers = users => {
     return `
       <li class="character">
         <img src="${user.picture}" alt="${user.name}">
-        <p class="name">${user.name} - </p>
-        <p>${user.age} years</p>
+        <p class="name">${user.name}, </p>
+        <p>${user.age}, </p>
+        <p>${user.gender}</p>
       </li>
     `
   }).join('')
@@ -137,13 +145,20 @@ const renderGender = users => {
 }
 
 const checkEmptyInput = () => {
-  searchInput.addEventListener('input', () => {
+  searchInput.addEventListener('input', _event => {
     if (searchInput.value !== '') {
       searchButton.disabled = false
     } else {
       searchButton.disabled = true
+      // clear()
     }
   })
 }
 
 const formatNumber = number => numberFormat.format(number)
+
+const clear = () => {
+  console.log('clear')
+  usersBox.innerHTML = ''
+  statiticsBox.innerHTML = ''
+}
