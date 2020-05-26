@@ -2,22 +2,6 @@
   margin: 32px 0;
 }
 
-img {
-  border-radius: 50%;
-  display: inline;
-  padding-right: 8px;
-}
-
-li.character {
-  margin-bottom: 16px;
-  padding: 8px;
-  list-style: none;
-}
-
-li.character p {
-  display: inline;
-}
-
 .loader {
   border: 16px solid #f3f3f3;
   border-radius: 50%;
@@ -35,4 +19,24 @@ li.character p {
   100% {
     transform: rotate(360deg);
   }
+}
+
+img {
+  border-radius: 50%;
+  display: inline;
+  padding-right: 8px;
+}
+
+li.character {
+  margin-bottom: 16px;
+  padding: 8px;
+  list-style: none;
+}
+
+li.character p {
+  display: inline;
+}
+
+#total-users {
+  text-align: center;
 }

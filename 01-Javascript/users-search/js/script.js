@@ -42,6 +42,17 @@ window.addEventListener('load', () => {
   fetchUsers()
 })
 
+const clear = () => {
+  console.log('clear')
+  usersList = ''
+  totalUsers.value = ''
+
+  agesSum.value = ''
+  agesAverage.value = ''
+  countMaleGender.value = ''
+  countFemaleGender.value = ''
+}
+
 const fetchUsers = async () => {
   try {
     const url = 'https://randomuser.me/api/?seed=javascript&results=100&nat=BR&noinfo'
@@ -147,6 +158,7 @@ const checkEmptyInput = () => {
       searchButton.disabled = false
     } else {
       searchButton.disabled = true
+      clear()
     }
   })
 }
