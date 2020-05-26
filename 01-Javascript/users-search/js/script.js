@@ -74,9 +74,9 @@ const preventFormSubmit = () => {
 
 // Busca o usuário de acordo com a tecla digitada.
 const searchUser = () => {
-  searchInput.addEventListener('keyup', e => {
+  searchInput.addEventListener('keyup', event => {
     const filteredUsers = allUsers.filter(character => {
-      return character.name.includes(e.target.value) // ou e.key
+      return lowerName(character.name).includes(lowerName(event.target.value)) // ou event.key
     })
 
     // console.log(filteredUsers)
@@ -87,6 +87,8 @@ const searchUser = () => {
     renderGender(filteredUsers)
   })
 }
+
+const lowerName = name => name.toLowerCase()
 
 // Renderiza os usuários na tela de acordo com o nome digitado.
 const renderUsers = users => {
