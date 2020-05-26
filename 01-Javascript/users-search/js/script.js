@@ -15,6 +15,9 @@ let searchButton = null
 
 let usersList = null
 
+let loader = null
+let body = null
+
 window.addEventListener('load', () => {
   totalUsers = document.querySelector('#total-users')
 
@@ -32,6 +35,9 @@ window.addEventListener('load', () => {
   searchButton.disabled = true
 
   usersList = document.querySelector('#users-list')
+
+  loader = document.querySelector(".loader")
+  body = document.querySelector('body')
 
   fetchUsers()
 })
@@ -65,7 +71,7 @@ const fetchUsers = async () => {
 // Após 3 segundos o "loading" será removido e tela será renderizada.
 const loading = () => {
   setTimeout(() => {
-    document.querySelector("body").removeChild(document.querySelector(".loader"))
+    body.removeChild(loader)
     render()
   }, 3000);
 }
