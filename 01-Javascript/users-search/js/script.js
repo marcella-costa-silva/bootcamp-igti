@@ -98,8 +98,7 @@ const searchUser = () => {
     // console.log(filteredUsers)
 
     renderUsers(filteredUsers)
-    renderSumAges(filteredUsers)
-    renderAverageAges(filteredUsers)
+    renderAges(filteredUsers)
     renderGender(filteredUsers)
   })
 }
@@ -123,15 +122,11 @@ const renderUsers = users => {
   usersList.innerHTML = usersHTML
 }
 
-const renderSumAges = users => {
-  const ages = users.reduce((acc, curr) => acc + curr.age, 0)
-  agesSum.textContent = `Sum: ${formatNumber(ages)}`
-}
-
-const renderAverageAges = users => {
+const renderAges = users => {
   const totalUsers = users.length
   const ages = users.reduce((acc, curr) => acc + curr.age, 0)
-  agesAverage.textContent = `Average: ${formatNumber(ages / totalUsers)}`
+  agesSum.textContent = `Sum: ${formatNumber(ages)}`
+  agesAverage.textContent = `Average: ${formatNumber((ages / totalUsers).toFixed(2))}`
 }
 
 const renderGender = users => {
